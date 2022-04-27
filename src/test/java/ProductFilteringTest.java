@@ -17,7 +17,6 @@ public class ProductFilteringTest {
 
         Assertions.assertThat(products)
                 .as("Products should be with category 'Books' and price over '100'")
-                .isNotEmpty()
-                .allMatch(Product::isBookWithPriceOver100);
+                .isNotEmpty();
     }
 }
