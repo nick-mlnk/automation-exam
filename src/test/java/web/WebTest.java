@@ -1,6 +1,6 @@
 package web;
 
-import apps.web.ui.pages.LandingPage;
+import apps.ui.pages.LandingPage;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import infrastructure.drivers.Browser;

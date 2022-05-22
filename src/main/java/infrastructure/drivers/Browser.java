@@ -12,7 +12,6 @@ import java.util.HashMap;
 
 public class Browser implements WebDriverProvider {
 
-    // skip parametrization for Webdrivers, use Chrome for demo
     @Override
     public WebDriver createDriver(Capabilities desiredCapabilities) {
         ChromeDriverManager.getInstance(DriverManagerType.CHROME).setup();

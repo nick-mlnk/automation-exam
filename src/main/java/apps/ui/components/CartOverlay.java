@@ -1,6 +1,6 @@
-package apps.web.ui.components;
+package apps.ui.components;
 
-import apps.web.ui.pages.LandingPage;
+import apps.ui.pages.LandingPage;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;

@@ -1,7 +1,7 @@
-package apps.web.ui.pages;
+package apps.ui.pages;
 
-import apps.web.ui.components.CartOverlay;
-import apps.web.ui.components.ProductContainer;
+import apps.ui.components.CartOverlay;
+import apps.ui.components.ProductContainer;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -1,4 +1,4 @@
-package apps.web.ui.components;
+package apps.ui.components;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;

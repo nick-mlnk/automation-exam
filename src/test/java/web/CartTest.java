@@ -1,7 +1,7 @@
 package web;
 
-import apps.web.ui.components.CartOverlay;
-import apps.web.ui.pages.CartSummaryPage;
+import apps.ui.components.CartOverlay;
+import apps.ui.pages.CartSummaryPage;
 import org.assertj.core.api.Assertions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;

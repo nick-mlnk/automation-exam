@@ -1,6 +1,6 @@
-package apps.web.ui.pages;
+package apps.ui.pages;
 
-import apps.web.ui.components.CartItem;
+import apps.ui.components.CartItem;
 import lombok.Getter;
 
 import java.util.List;
