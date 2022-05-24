@@ -10,13 +10,13 @@ import static com.codeborne.selenide.Selenide.$;
 @Getter
 public class BasePage {
 
-    final protected SelenideElement cart;
+    final protected SelenideElement logo;
 
     protected BasePage() {
-        cart = $("a[title='View my shopping cart']");
+        logo = $("#tuneInLogo");
     }
 
     protected void waitUntilLoaded() {
-        cart.shouldBe(Condition.visible);
+        logo.shouldBe(Condition.visible);
     }
 }
