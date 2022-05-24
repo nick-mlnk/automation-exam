@@ -1,6 +1,7 @@
 package infrastructure.configuration;
 
 import infrastructure.platform.App;
+import infrastructure.platform.Browser;
 import infrastructure.platform.Env;
 
 import static java.lang.System.*;
@@ -22,6 +23,14 @@ public class ConfigurationManger {
         App application = App.from(region);
         setProperty("app", application.getRegion());
         return application;
+    }
+
+    public static Browser getBrowser() {
+        String name = nonNull(getProperty("browser")) ? getProperty("browser") : getenv("browser ");
+        name = nonNull(name) ? name.toLowerCase() : Browser.CHROME.getName();
+        Browser browser = Browser.from(name);
+        setProperty("browser", browser.getName());
+        return browser;
     }
 
 }
