@@ -3,22 +3,27 @@ package web;
 import apps.ui.pages.LandingPage;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
-import infrastructure.drivers.Browser;
+import infrastructure.drivers.Driver;
+import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
-public class WebTest extends Browser {
+import static infrastructure.configuration.ConfigurationManger.DOMAIN_URL;
+
+public class WebTest extends Driver {
 
     protected LandingPage landingPage;
+    protected SoftAssertions softAssertions;
 
     @BeforeClass(alwaysRun = true)
     public void beforeClassSetup() {
-        Configuration.browser = Browser.class.getName();
+        Configuration.browser = Driver.class.getName();
         Configuration.timeout = 15000;
         Configuration.browserSize = "2100x1080" ;
-        String appUrl = "http://automationpractice.com/index.php"; // skip parametrization of environments
+        String appUrl = DOMAIN_URL;
         Selenide.open(appUrl);
         landingPage = new LandingPage();
+        softAssertions = new SoftAssertions();
     }
 
     @AfterClass(alwaysRun = true)

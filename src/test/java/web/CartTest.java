@@ -30,8 +30,9 @@ public class CartTest extends WebTest {
         String actualHeaderText = cartOverlay.getHeaderText();
 
         Assertions.assertThat(actualHeaderText)
-                .isEqualTo(SUCCESS_MSG)
-                .as(format("Success message [%s] should be shown on cart overlay", SUCCESS_MSG));
+                .as(format("Success message [%s] should be shown on cart overlay", SUCCESS_MSG))
+                .isEqualTo(SUCCESS_MSG);
+
     }
 
     @Test(dependsOnMethods = "testItemsAreAddedToCartSuccessfully")
@@ -40,8 +41,8 @@ public class CartTest extends WebTest {
                 .clearCart();
 
         Assertions.assertThat(cartSummaryPage.isCartEmpty())
-                .isTrue()
-                .as("Cart should be empty");
+                .as("Cart should be empty")
+                .isTrue();
     }
 
 

@@ -28,4 +28,8 @@ public class CartSummaryPage extends BasePage {
     public boolean isCartEmpty() {
         return items.isEmpty();
     }
+
+    public boolean isProductPresent(String product) {
+        return items.stream().anyMatch(item -> item.getProductName().equals(product));
+    }
 }

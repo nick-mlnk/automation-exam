@@ -1,19 +1,20 @@
 package infrastructure.configuration;
 
-import infrastructure.platform.Env;
+import infrastructure.platform.Browser;
 
-import java.util.Objects;
-
-import static java.lang.Boolean.parseBoolean;
+import static java.lang.System.*;
+import static java.util.Objects.nonNull;
 
 public class ConfigurationManger {
 
-    public static Env getEnv() {
-        String env = System.getProperty("env");
-        env = Objects.nonNull(env) ? env.toLowerCase() : Env.DEV.getName();
-        Env environment = Env.from(env);
-        System.setProperty("env", environment.getName());
-        return environment;
+    public static String DOMAIN_URL = "http://automationpractice.com/index.php"; // skip parametrization of env
+
+    public static Browser getBrowser() {
+        String name = nonNull(getProperty("browser")) ? getProperty("browser") : getenv("browser");
+        name = nonNull(name) ? name.toLowerCase() : Browser.CHROME.getName();
+        Browser browser = Browser.from(name);
+        setProperty("browser", browser.getName());
+        return browser;
     }
 
 }

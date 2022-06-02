@@ -2,6 +2,7 @@ package apps.ui.pages;
 
 import apps.ui.components.CartOverlay;
 import apps.ui.components.ProductContainer;
+import io.qameta.allure.Step;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,7 +16,8 @@ public class LandingPage extends BasePage {
 
     public LandingPage() {
         super.waitUntilLoaded();
-        productContainers = $$("#homefeatured .product-container").stream()
+        productContainers = $$("#homefeatured .product-container")
+                .stream()
                 .map(ProductContainer::new)
                 .collect(Collectors.toList());
     }
@@ -29,6 +31,18 @@ public class LandingPage extends BasePage {
                         format("Product was not found by title[%s] and hasDiscount[%s]", title, hasDiscount)));
         productContainer.addToCart();
         return new CartOverlay();
+    }
+
+    @Step
+    public String addRandomProductToCartWithClosingOverlay() {
+        ProductContainer productContainer = productContainers.stream()
+                .unordered()
+                .parallel()
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException("Random Product was not found"));
+        productContainer.addToCart();
+        new CartOverlay().closeOverlay();
+        return productContainer.getTitle();
     }
 
     public CartSummaryPage navigateToCartPage() {
