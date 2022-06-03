@@ -1,21 +1,24 @@
-package apps.web.ui.pages;
+package apps.ui.pages;
 
-import apps.web.ui.components.CartOverlay;
-import apps.web.ui.components.ProductContainer;
+import apps.ui.components.CartOverlay;
+import apps.ui.components.ProductContainer;
+import com.codeborne.selenide.SelenideDriver;
+import io.qameta.allure.Step;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.codeborne.selenide.Selenide.$$;
 import static java.lang.String.format;
 
 public class LandingPage extends BasePage {
 
     List<ProductContainer> productContainers;
 
-    public LandingPage() {
+    public LandingPage(SelenideDriver driver) {
+        super(driver);
         super.waitUntilLoaded();
-        productContainers = $$("#homefeatured .product-container").stream()
+        productContainers = this.driver.$$("#homefeatured .product-container")
+                .stream()
                 .map(ProductContainer::new)
                 .collect(Collectors.toList());
     }
@@ -28,11 +31,23 @@ public class LandingPage extends BasePage {
                 .orElseThrow(() -> new IllegalStateException(
                         format("Product was not found by title[%s] and hasDiscount[%s]", title, hasDiscount)));
         productContainer.addToCart();
-        return new CartOverlay();
+        return new CartOverlay(driver);
+    }
+
+    @Step
+    public String addRandomProductToCartWithClosingOverlay() {
+        ProductContainer productContainer = productContainers.stream()
+                .unordered()
+                .parallel()
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException("Random Product was not found"));
+        productContainer.addToCart();
+        new CartOverlay(driver).closeOverlay();
+        return productContainer.getTitle();
     }
 
     public CartSummaryPage navigateToCartPage() {
         getCart().scrollTo().click();
-        return new CartSummaryPage();
+        return new CartSummaryPage(driver);
     }
 }

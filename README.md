@@ -1,11 +1,11 @@
-# automation-exam
+### Prerequisites
 
+1. Java (1.8) can be installed from [sdkman](https://sdkman.io) (flexible to switch Java versions)
+2. [Maven](https://maven.apache.org)
 
-What are the mobile application types you are familiar with?
-- I'm familiar with native, web and hybrid mobile apps
+### How to run the tests from command line
 
-##### Navigation to tests
-- [web-automation](src/test/java/web/CartTest.java)
-- [mobile-automation](src/test/java/mobile/LoginTest.java)
-- [product](src/test/java/ProductFilteringTest.java)
-- [longest-strings](src/test/java/LongestStringsTest.java)
+1. navigate to automation-repo from CLI `cd /automation-exam`
+2. run tests `mvn clean test -Dsuite=cartTestSuite.xml`
+3. generate report `mvn allure:serve`
+4. open report with a default browser `cd target/surefire-reports && open index.html`
