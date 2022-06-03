@@ -1,24 +1,24 @@
 package apps.ui.components;
 
 import apps.ui.pages.AuthenticationPage;
+import com.codeborne.selenide.SelenideDriver;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import lombok.Getter;
 
 import java.util.stream.Stream;
 
-import static com.codeborne.selenide.Selenide.$;
-import static java.util.Arrays.asList;
 
 @Getter
-public class NavigationHeader {
+public class NavigationHeader extends UIComponent {
 
     private final SelenideElement element;
     private final SelenideElement accountLink;
     private final SelenideElement userInfoLink;
 
-    public NavigationHeader() {
-        this.element = $("#header .nav");
+    public NavigationHeader(SelenideDriver driver) {
+        super(driver);
+        this.element = this.driver.$("#header .nav");
         this.accountLink = element.$(".account");
         this.userInfoLink = element.$("a[rel='nofollow']");
     }
@@ -37,6 +37,6 @@ public class NavigationHeader {
 
     @Step
     public AuthenticationPage goToAuthenticatePage() {
-        return new AuthenticationPage();
+        return new AuthenticationPage(driver);
     }
 }

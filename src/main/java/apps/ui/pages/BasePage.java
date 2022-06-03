@@ -1,13 +1,12 @@
 package apps.ui.pages;
 
 import apps.ui.components.NavigationHeader;
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.*;
 import io.qameta.allure.Step;
 import lombok.Getter;
 
-import static com.codeborne.selenide.Selenide.$;
+import java.time.Duration;
+
 import static infrastructure.configuration.ConfigurationManger.DOMAIN_URL;
 import static java.util.Arrays.asList;
 
@@ -18,17 +17,20 @@ public class BasePage {
     final protected SelenideElement cart;
     final protected SelenideElement searchField;
     final protected NavigationHeader navHeader;
+    final protected SelenideDriver driver;
 
-    protected BasePage() {
-        cart = $("a[title='View my shopping cart']");
-        searchField = $(".search_query");
-        navHeader = new NavigationHeader();
+
+    protected BasePage(SelenideDriver driver) {
+        this.driver = driver;
+        cart = this.driver.$("a[title='View my shopping cart']");
+        searchField = this.driver.$(".search_query");
+        navHeader = new NavigationHeader(this.driver);
     }
 
     @Step
     protected void waitUntilLoaded() {
         asList(cart, searchField, navHeader.getElement())
-                .forEach(item -> item.shouldBe(Condition.visible));
+                .forEach(item -> item.shouldBe(Condition.visible, Duration.ofSeconds(8)));
     }
 
     @Step
@@ -44,21 +46,21 @@ public class BasePage {
     @Step
     public ProductPage findFirstProductFromSearch(String product) {
         typeProductNameInSearchField(product);
-        $(".ac_results")
-                .shouldBe(Condition.visible)
+        driver.$(".ac_results")
+                .shouldBe(Condition.visible, Duration.ofSeconds(8))
                 .$("li").click();
-        return new ProductPage();
+        return new ProductPage(driver);
     }
 
     @Step
     public CartSummaryPage navigateToCart() {
         cart.click();
-        return new CartSummaryPage();
+        return new CartSummaryPage(driver);
     }
 
     @Step
     public CartSummaryPage navigateToCartByUrl() {
-        Selenide.open(DOMAIN_URL.concat("?controller=order"));
-        return new CartSummaryPage();
+        driver.open(DOMAIN_URL.concat("?controller=order"));
+        return new CartSummaryPage(driver);
     }
 }

@@ -1,49 +1,23 @@
 package infrastructure.platform;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-import io.github.bonigarcia.wdm.config.DriverManagerType;
+import com.codeborne.selenide.Config;
+import com.codeborne.selenide.SelenideConfig;
+import com.codeborne.selenide.SelenideDriver;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.opera.OperaDriver;
 
 import java.util.Objects;
+
 
 @AllArgsConstructor
 @Getter
 public enum Browser {
 
-    CHROME("chrome") {
-        @Override
-        public WebDriver getDriver() {
-            WebDriverManager.getInstance(DriverManagerType.CHROME).setup();
-            return new ChromeDriver();
-        }
-    },
-    EDGE("edge") {
-        @Override
-        public WebDriver getDriver() {
-            WebDriverManager.getInstance(DriverManagerType.EDGE).setup();
-            return new EdgeDriver();
-        }
-    },
-    OPERA("opera") {
-        @Override
-        public WebDriver getDriver() {
-            WebDriverManager.getInstance(DriverManagerType.OPERA).setup();
-            return new OperaDriver();
-        }
-    },
-    FIREFOX("firefox") {
-        @Override
-        public WebDriver getDriver() {
-            WebDriverManager.getInstance(DriverManagerType.FIREFOX).setup();
-            return new FirefoxDriver();
-        }
-    };
+    CHROME("chrome"),
+    EDGE("edge"),
+    OPERA("opera"),
+    FIREFOX("firefox");
 
     final String name;
 
@@ -60,5 +34,12 @@ public enum Browser {
 
     public WebDriver getDriver() {
         throw new IllegalStateException("Please override this method");
+    }
+
+    public SelenideDriver getSelenideDriver() {
+        Config config = new SelenideConfig()
+                .browser(this.name)
+                .timeout(15000);
+        return new SelenideDriver(config);
     }
 }

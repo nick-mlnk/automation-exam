@@ -1,11 +1,11 @@
 package apps.ui.pages;
 
+import com.codeborne.selenide.SelenideDriver;
 import com.codeborne.selenide.SelenideElement;
 import data.UserData;
 import io.qameta.allure.Step;
 import lombok.Getter;
 
-import static com.codeborne.selenide.Selenide.$;
 
 @Getter
 public class AuthenticationPage extends BasePage {
@@ -15,9 +15,10 @@ public class AuthenticationPage extends BasePage {
     private final SelenideElement passwordField;
     private final SelenideElement signInBtn;
 
-    public AuthenticationPage() {
+    public AuthenticationPage(SelenideDriver driver) {
+        super(driver);
         super.waitUntilLoaded();
-        this.form = $("#login_form");
+        this.form = this.driver.$("#login_form");
         this.emailField = form.$("#email");
         this.passwordField = form.$("#passwd");
         this.signInBtn = form.$("#SubmitLogin");
@@ -34,6 +35,6 @@ public class AuthenticationPage extends BasePage {
     @Step
     public AccountPage login(UserData userData) {
         signIn(userData);
-        return new AccountPage();
+        return new AccountPage(driver);
     }
 }

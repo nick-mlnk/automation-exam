@@ -1,14 +1,24 @@
 package infrastructure.drivers;
 
-import com.codeborne.selenide.WebDriverProvider;
-import infrastructure.configuration.ConfigurationManger;
-import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.WebDriver;
+import com.codeborne.selenide.SelenideDriver;
+import infrastructure.platform.Browser;
 
-public class Driver implements WebDriverProvider {
+import static infrastructure.configuration.ConfigurationManger.getBrowser;
+import static java.util.Objects.isNull;
 
-    @Override
-    public WebDriver createDriver(Capabilities desiredCapabilities) {
-        return ConfigurationManger.getBrowser().getDriver();
+public class Driver {
+
+    private static ThreadLocal<SelenideDriver> driverThreadLocal = new ThreadLocal<>();
+
+    public static void setSelenideDriver(String browser) {
+        driverThreadLocal.set(Browser.from(browser).getSelenideDriver());
     }
+
+    public static SelenideDriver getSelenideDriver() {
+        if (isNull(driverThreadLocal.get())) {
+            setSelenideDriver(getBrowser().getName());
+        }
+        return driverThreadLocal.get();
+    }
+
 }

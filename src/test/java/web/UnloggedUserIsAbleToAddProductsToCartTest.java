@@ -2,9 +2,7 @@ package web;
 
 import apps.ui.pages.CartSummaryPage;
 import data.UserData;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

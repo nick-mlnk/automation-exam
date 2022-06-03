@@ -4,9 +4,7 @@ import apps.ui.pages.AccountPage;
 import apps.ui.pages.CartSummaryPage;
 import apps.ui.pages.ProductPage;
 import data.UserData;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -66,7 +64,7 @@ public class LoggedInUserIsAbleToAddProductsToCartTest extends WebTest {
 
     @AfterClass(alwaysRun = true)
     public void clearCart() {
-        CartSummaryPage cartPage = productPage.navigateToCartByUrl();
+        CartSummaryPage cartPage = landingPage.navigateToCartByUrl();
         if (!cartPage.isCartEmpty()) {
             cartPage.clearCart();
         }

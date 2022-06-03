@@ -4,6 +4,8 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 
+import java.time.Duration;
+
 @Getter
 public class CartItem {
 
@@ -19,7 +21,7 @@ public class CartItem {
 
     public void clickTrashIcon() {
         this.trashIcon.click();
-        this.trashIcon.shouldBe(Condition.disappear);
+        this.trashIcon.shouldBe(Condition.disappear, Duration.ofSeconds(8));
     }
 
     public String getProductName() {

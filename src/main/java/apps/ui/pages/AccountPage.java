@@ -1,19 +1,20 @@
 package apps.ui.pages;
 
+import com.codeborne.selenide.SelenideDriver;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import lombok.Getter;
 
-import static com.codeborne.selenide.Selenide.$;
 
 @Getter
 public class AccountPage extends BasePage {
 
     private final SelenideElement pageHeading;
 
-    public AccountPage() {
+    public AccountPage(SelenideDriver driver) {
+        super(driver);
         super.waitUntilLoaded();
-        this.pageHeading = $(".page-heading");
+        this.pageHeading = this.driver.$(".page-heading");
     }
 
     @Step
