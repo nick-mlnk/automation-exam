@@ -8,6 +8,7 @@ import lombok.Getter;
 import java.time.Duration;
 
 import static infrastructure.configuration.ConfigurationManger.DOMAIN_URL;
+import static infrastructure.drivers.Driver.getSelenideDriver;
 import static java.util.Arrays.asList;
 
 
@@ -20,11 +21,11 @@ public class BasePage {
     final protected SelenideDriver driver;
 
 
-    protected BasePage(SelenideDriver driver) {
-        this.driver = driver;
+    protected BasePage() {
+        this.driver = getSelenideDriver();
         cart = this.driver.$("a[title='View my shopping cart']");
         searchField = this.driver.$(".search_query");
-        navHeader = new NavigationHeader(this.driver);
+        navHeader = new NavigationHeader();
     }
 
     @Step
@@ -49,18 +50,18 @@ public class BasePage {
         driver.$(".ac_results")
                 .shouldBe(Condition.visible, Duration.ofSeconds(8))
                 .$("li").click();
-        return new ProductPage(driver);
+        return new ProductPage();
     }
 
     @Step
     public CartSummaryPage navigateToCart() {
         cart.click();
-        return new CartSummaryPage(driver);
+        return new CartSummaryPage();
     }
 
     @Step
     public CartSummaryPage navigateToCartByUrl() {
         driver.open(DOMAIN_URL.concat("?controller=order"));
-        return new CartSummaryPage(driver);
+        return new CartSummaryPage();
     }
 }

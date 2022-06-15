@@ -2,7 +2,6 @@ package apps.ui.pages;
 
 import apps.ui.components.CartOverlay;
 import apps.ui.components.ProductContainer;
-import com.codeborne.selenide.SelenideDriver;
 import io.qameta.allure.Step;
 
 import java.util.List;
@@ -14,8 +13,8 @@ public class LandingPage extends BasePage {
 
     List<ProductContainer> productContainers;
 
-    public LandingPage(SelenideDriver driver) {
-        super(driver);
+    public LandingPage() {
+        super();
         super.waitUntilLoaded();
         productContainers = this.driver.$$("#homefeatured .product-container")
                 .stream()
@@ -31,7 +30,7 @@ public class LandingPage extends BasePage {
                 .orElseThrow(() -> new IllegalStateException(
                         format("Product was not found by title[%s] and hasDiscount[%s]", title, hasDiscount)));
         productContainer.addToCart();
-        return new CartOverlay(driver);
+        return new CartOverlay();
     }
 
     @Step
@@ -42,12 +41,12 @@ public class LandingPage extends BasePage {
                 .findFirst()
                 .orElseThrow(() -> new IllegalStateException("Random Product was not found"));
         productContainer.addToCart();
-        new CartOverlay(driver).closeOverlay();
+        new CartOverlay().closeOverlay();
         return productContainer.getTitle();
     }
 
     public CartSummaryPage navigateToCartPage() {
         getCart().scrollTo().click();
-        return new CartSummaryPage(driver);
+        return new CartSummaryPage();
     }
 }

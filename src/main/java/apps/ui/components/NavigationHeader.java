@@ -16,8 +16,8 @@ public class NavigationHeader extends UIComponent {
     private final SelenideElement accountLink;
     private final SelenideElement userInfoLink;
 
-    public NavigationHeader(SelenideDriver driver) {
-        super(driver);
+    public NavigationHeader() {
+        super();
         this.element = this.driver.$("#header .nav");
         this.accountLink = element.$(".account");
         this.userInfoLink = element.$("a[rel='nofollow']");
@@ -37,6 +37,6 @@ public class NavigationHeader extends UIComponent {
 
     @Step
     public AuthenticationPage goToAuthenticatePage() {
-        return new AuthenticationPage(driver);
+        return new AuthenticationPage();
     }
 }

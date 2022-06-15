@@ -3,7 +3,7 @@
 <suite name="End To End Testing App" parallel="tests" thread-count="2">
 
     <test verbose="1" name="Unlogged User Is Able To Add Products To Cart Test: Chrome">
-        <parameter name="browser" value="chrome"/>
+        <parameter name="browser" value="edge"/>
         <classes>
             <class name="web.UnloggedUserIsAbleToAddProductsToCartTest"></class>
         </classes>

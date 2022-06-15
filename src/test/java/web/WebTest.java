@@ -18,7 +18,7 @@ public class WebTest extends Driver {
     public void beforeClassSetup(@Optional String browser) {
         setSelenideDriver(browser);
         getSelenideDriver().open(DOMAIN_URL);
-        landingPage = new LandingPage(getSelenideDriver());
+        landingPage = new LandingPage();
         softAssertions = new SoftAssertions();
     }
 

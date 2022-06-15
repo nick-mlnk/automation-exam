@@ -1,6 +1,5 @@
 package apps.ui.pages;
 
-import com.codeborne.selenide.SelenideDriver;
 import com.codeborne.selenide.SelenideElement;
 import data.UserData;
 import io.qameta.allure.Step;
@@ -15,8 +14,8 @@ public class AuthenticationPage extends BasePage {
     private final SelenideElement passwordField;
     private final SelenideElement signInBtn;
 
-    public AuthenticationPage(SelenideDriver driver) {
-        super(driver);
+    public AuthenticationPage() {
+        super();
         super.waitUntilLoaded();
         this.form = this.driver.$("#login_form");
         this.emailField = form.$("#email");
@@ -35,6 +34,6 @@ public class AuthenticationPage extends BasePage {
     @Step
     public AccountPage login(UserData userData) {
         signIn(userData);
-        return new AccountPage(driver);
+        return new AccountPage();
     }
 }

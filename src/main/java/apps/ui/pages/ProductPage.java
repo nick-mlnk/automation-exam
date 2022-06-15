@@ -12,8 +12,9 @@ public class ProductPage extends BasePage {
     private final SelenideElement addToCartBtn;
     private final SelenideElement header;
 
-    public ProductPage(SelenideDriver driver) {
-        super(driver);
+    public ProductPage() {
+        super();
+//        super(driver);
         super.waitUntilLoaded();
         this.addToCartBtn = driver.$("#add_to_cart");
         this.header = driver.$("[itemprop='name']");
@@ -21,7 +22,7 @@ public class ProductPage extends BasePage {
 
     public CartOverlay addToCart() {
         addToCartBtn.click();
-        return new CartOverlay(driver);
+        return new CartOverlay();
     }
 
     public ProductPage addToCartWithClosingOverlay() {

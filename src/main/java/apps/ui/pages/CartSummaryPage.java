@@ -13,8 +13,8 @@ public class CartSummaryPage extends BasePage {
 
     List<CartItem> items;
 
-    public CartSummaryPage(SelenideDriver driver) {
-        super(driver);
+    public CartSummaryPage() {
+        super();
         super.waitUntilLoaded();
         items = this.driver.$$(".cart_item").stream()
                 .map(CartItem::new)
@@ -23,7 +23,7 @@ public class CartSummaryPage extends BasePage {
 
     public CartSummaryPage clearCart() {
         items.forEach(CartItem::clickTrashIcon);
-        return new CartSummaryPage(this.driver);
+        return new CartSummaryPage();
     }
 
     public boolean isCartEmpty() {
