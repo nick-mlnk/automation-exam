@@ -3,14 +3,14 @@
 <suite name="End To End Testing App" parallel="tests" thread-count="2">
 
     <test verbose="1" name="Unlogged User Is Able To Add Products To Cart Test: Chrome">
-        <parameter name="browser" value="edge"/>
+        <parameter name="browser" value="chrome"/>
         <classes>
             <class name="web.UnloggedUserIsAbleToAddProductsToCartTest"></class>
         </classes>
     </test>
 
     <test verbose="1" name="LoggedIn User Is Able To Add Products To Cart Test: Opera">
-        <parameter name="browser" value="opera"/>
+        <parameter name="browser" value="chrome"/>
         <classes>
             <class name="web.LoggedInUserIsAbleToAddProductsToCartTest"></class>
         </classes>

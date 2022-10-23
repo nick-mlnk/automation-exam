@@ -1,0 +1,11 @@
+1. Update POM.xml with 11 Java
+
+9 JAVA:
+2. Immutable Set/Map/List
+3. Optional
+10 JAVA:
+4. VAR
+5. ImmutableCollection
+6. Files
+7. Not Predicate
+8. Local var for lambda

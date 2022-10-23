@@ -15,7 +15,7 @@ public class WebTest extends Driver {
 
     @BeforeClass(alwaysRun = true)
     @Parameters({"browser"})
-    public void beforeClassSetup(@Optional String browser) {
+    public void beforeClassSetup(@Optional(value = "chrome") String browser) {
         setSelenideDriver(browser);
         getSelenideDriver().open(DOMAIN_URL);
         landingPage = new LandingPage();
