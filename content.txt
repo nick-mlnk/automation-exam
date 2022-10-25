@@ -9,3 +9,10 @@
 6. Files
 7. Not Predicate
 8. Local var for lambda
+
+Patterns:
+1. Page Object VS Fluent Page Object
+2. Factory -> factory package
+3. Facade -> LandingPage.addProductToCart
+4. Decorator -> components
+5. Singleton -> ConfManager

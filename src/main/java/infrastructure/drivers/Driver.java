@@ -1,9 +1,9 @@
 package infrastructure.drivers;
 
 import com.codeborne.selenide.SelenideDriver;
+import infrastructure.configuration.ConfigurationManger;
 import infrastructure.platform.Browser;
 
-import static infrastructure.configuration.ConfigurationManger.getBrowser;
 import static java.util.Objects.isNull;
 
 public class Driver {
@@ -16,7 +16,7 @@ public class Driver {
 
     public static SelenideDriver getSelenideDriver() {
         if (isNull(driverThreadLocal.get())) {
-            setSelenideDriver(getBrowser().getName());
+            setSelenideDriver(ConfigurationManger.getInstance().getBrowser().getName());
         }
         return driverThreadLocal.get();
     }
